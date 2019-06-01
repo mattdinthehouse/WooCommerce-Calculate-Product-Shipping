@@ -11,9 +11,12 @@ class WCCPS {
 	}
 
 	private function includes() {
-		require_once WCCPS_DIR.'/includes/class-WCCPS-frontend.php';
+		require_once WCCPS_DIR.'/includes/class-wccps-ajax.php';
+		require_once WCCPS_DIR.'/includes/class-wccps-frontend.php';
 
 		$this->frontend = new WCCPS_Frontend();
+
+		WCCPS_AJAX::init();
 	}
 
 	private function hooks() {
