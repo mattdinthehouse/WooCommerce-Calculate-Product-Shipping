@@ -19,10 +19,12 @@ do_action('wccps_before_shipping_calculator');
 ?>
 
 <form class="woocommerce-shipping-calculator" action="<?php echo esc_url(get_permalink()); ?>" method="post">
+	
+	<?php printf( '<a href="#" class="shipping-calculator-button">%s</a>', esc_html( ! empty( $button_text ) ? $button_text : __( 'Calculate shipping', 'woocommerce' ) ) ); ?>
 
 	<?php wc_print_notices(); ?>
 
-	<section class="shipping-calculator-form">
+	<section class="shipping-calculator-form" style="display:none;">
 		<?php if(apply_filters('woocommerce_shipping_calculator_enable_country', true)) { ?>
 			<p class="form-row form-row-wide" id="calc_shipping_country_field">
 				<select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state country_select" rel="calc_shipping_state">

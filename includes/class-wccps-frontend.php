@@ -32,13 +32,14 @@ class WCCPS_Frontend {
 	}
 
 	public function enqueue_scripts() {
-		wp_register_script('wccps-calculate-shipping', WCCPS_URL.'/assets/js/calculate-shipping.js', array('jquery'), WCCPS_VERSION, true);
-		wp_enqueue_script('wccps-calculate-shipping');
-		wp_localize_script('wccps-calculate-shipping', 'wccps_calculate_shipping_params', apply_filters('wccps_calculate_shipping_params', array(
-			'ajax_url'                => WC()->ajax_url(),
-			'wc_ajax_url'             => WC_AJAX::get_endpoint('%%endpoint%%'),
-			'i18n_calculate_shipping' => esc_attr__('Calculate shipping', 'wccps'),
-			'i18n_calculate'          => esc_attr__('Calculate', 'wccps'),
-		)));
+		if(is_product() || (!empty($post->post_content) && strstr($post->post_content, '[product_page'))) {
+			wp_enqueue_script('selectWoo');
+			wp_enqueue_style('select2');
+
+			wp_register_script('wccps-shipping-calculator', WCCPS_URL.'/assets/js/shipping-calculator.js', array('jquery', 'woocommerce', 'wc-country-select', 'wc-address-i18n'), WCCPS_VERSION, true);
+			wp_enqueue_script('wccps-shipping-calculator');
+			wp_localize_script('wccps-shipping-calculator', 'wccps_shipping_calculator_params', apply_filters('wccps_shipping_calculator_params', array(
+			)));
+		}
 	}
 }
