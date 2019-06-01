@@ -58,26 +58,6 @@ class WCCPS {
 		// Sanitise the quantity
 		$quantity = max(1, $quantity);
 
-		/*// Fetch the location information
-		$country  = wc_clean( $_POST['calc_shipping_country'] );
-		$state    = wc_clean( isset( $_POST['calc_shipping_state'] ) ? $_POST['calc_shipping_state'] : '' );
-		$postcode = apply_filters( 'woocommerce_shipping_calculator_enable_postcode', true ) ? wc_clean( $_POST['calc_shipping_postcode'] ) : '';
-		$city     = apply_filters( 'woocommerce_shipping_calculator_enable_city', false ) ? wc_clean( $_POST['calc_shipping_city'] ) : '';
-
-		if ( $postcode && ! WC_Validation::is_postcode( $postcode, $country ) ) {
-			throw new Exception( __( 'Please enter a valid postcode/ZIP.', 'woocommerce' ) );
-		} elseif ( $postcode ) {
-			$postcode = wc_format_postcode( $postcode, $country );
-		}
-
-		if ( $country ) {
-			WC()->customer->set_location( $country, $state, $postcode, $city );
-			WC()->customer->set_shipping_location( $country, $state, $postcode, $city );
-		} else {
-			WC()->customer->set_to_base();
-			WC()->customer->set_shipping_to_base();
-		}*/
-
 		// Generate the cart contents
 		$cart = self::generate_cart_contents($product, $product_id, $variation_id, $quantity);
 
